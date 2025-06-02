@@ -8,7 +8,7 @@ const favoriteRecipes = [
   {
     id: 1,
     title: "Mac & Cheese Fusion Bowls",
-    image: "/images/macandcheese.pmg",
+    image: "/images/macandcheese.png",
     category: "North Indian",
     likes: 1263,
   },

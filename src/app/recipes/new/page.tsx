@@ -214,7 +214,7 @@ export default function NewRecipePage() {
               </div>
 
               <div>
-                <Label>Tags (e.g., "Vegan", "Gluten-Free")</Label>
+                <Label>Tags (e.g., &quot;Vegan&quot;, &quot;Gluten-Free&quot;)</Label>
                 <div className="flex flex-wrap gap-2 mb-2">
                   {recipe.tags.map((tag) => (
                     <Badge key={tag} variant="secondary" className="flex items-center gap-1">

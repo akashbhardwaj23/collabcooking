@@ -8,17 +8,21 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { ArrowLeft, Heart, Share, Clock, Users, Scale } from "lucide-react"
 import Link from "next/link"
 import { Timer } from "@/components/timer"
+import { useParams } from "next/navigation"
 
-export default function RecipeDetailPage({ params }: { params: { id: string } }) {
+export default function RecipeDetailPage() {
+  const params = useParams()
+  const id = params.id as string;
   const [liked, setLiked] = useState(false)
   const [servings, setServings] = useState(4)
   const [currentStep, setCurrentStep] = useState(0)
   const [showCollaborators, setShowCollaborators] = useState(false)
   const [newCollaboratorEmail, setNewCollaboratorEmail] = useState("")
 
+
   // Recipe data - in a real app, this would be fetched from the database
   const recipe = {
-    id: params.id,
+    id: id,
     title: "Buttery Croissants",
     description: "Classic French croissants with a buttery, flaky texture",
     originalServings: 4,

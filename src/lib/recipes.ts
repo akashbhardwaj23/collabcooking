@@ -113,7 +113,7 @@ export async function getRecipes(limit = 10, offset = 0) {
     ...recipe,
     average_rating:
       recipe.ratings.length > 0
-        ? recipe.ratings.reduce((sum: number, r: any) => sum + r.rating, 0) / recipe.ratings.length
+        ? recipe.ratings.reduce((sum: number, r) => sum + r.rating, 0) / recipe.ratings.length
         : 0,
   }))
 
@@ -149,8 +149,8 @@ export async function getRecipeById(id: string) {
   }
 
   // Sort ingredients and steps by order_index
-  data.ingredients = data.ingredients.sort((a: any, b: any) => a.order_index - b.order_index)
-  data.steps = data.steps.sort((a: any, b: any) => a.order_index - b.order_index)
+  data.ingredients = data.ingredients.sort((a, b) => a.order_index - b.order_index)
+  data.steps = data.steps.sort((a, b) => a.order_index - b.order_index)
 
   // Calculate average rating
   const averageRating =

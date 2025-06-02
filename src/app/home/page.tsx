@@ -6,7 +6,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Search, Heart, ChefHat, Home, Settings, Download, PanelRightOpen, PanelRightClose } from "lucide-react"
+import { Search, Heart, ChefHat, Home, Settings, Download, PanelRightOpen, PanelRightClose, Plus } from "lucide-react"
 import Link from "next/link"
 import { useAuth } from "@/components/auth-provider"
 import { motion } from "motion/react"
@@ -167,26 +167,12 @@ export default function HomePage() {
           </div>
 
           <div className="flex items-center space-x-4">
-            <Link href="/generator">
-              <div className="w-8 h-8 bg-orange-500 rounded-lg flex items-center justify-center">
-                <span className="text-white text-sm">🍳</span>
-              </div>
-            </Link>
-            <Link href="/favourites">
-              <div className="w-8 h-8 bg-gray-200 rounded-lg flex items-center justify-center">
-                <span className="text-gray-600 text-sm">❤️</span>
-              </div>
-            </Link>
-            <Link href="/my-recipes">
-              <div className="w-8 h-8 bg-gray-200 rounded-lg flex items-center justify-center">
-                <span className="text-gray-600 text-sm">⭐</span>
-              </div>
-            </Link>
-            <Link href="/profile">
-              <div className="w-8 h-8 bg-gray-200 rounded-lg flex items-center justify-center">
-                <span className="text-gray-600 text-sm">👤</span>
-              </div>
-            </Link>
+          <Link href="/create-recipe">
+          <Button className="bg-orange-500 hover:bg-orange-600 h-9 px-3">
+            <Plus className="h-4 w-4 mr-1" />
+            New
+          </Button>
+        </Link>
           </div>
         </div>
       </header>

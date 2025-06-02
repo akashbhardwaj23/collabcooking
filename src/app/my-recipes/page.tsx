@@ -32,7 +32,7 @@ export default function MyRecipesPage() {
           <Link href="/recipe/1">
             <div className="relative">
               <img
-                src="/images/mac-cheese-fusion.png"
+                src="/images/macandcheese.png"
                 alt="Mac & Cheese Fusion Bowls"
                 className="w-full h-40 object-cover"
               />
@@ -56,7 +56,7 @@ export default function MyRecipesPage() {
           <Link href="/recipe/2">
             <div className="relative">
               <img
-                src="/images/mac-cheese-fusion.png"
+                src="/images/croissant.png"
                 alt="Mac & Cheese Fusion Bowls"
                 className="w-full h-40 object-cover"
               />
