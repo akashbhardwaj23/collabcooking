@@ -113,7 +113,9 @@ export async function getRecipes(limit = 10, offset = 0) {
     ...recipe,
     average_rating:
       recipe.ratings.length > 0
-        ? recipe.ratings.reduce((sum: number, r) => sum + r.rating, 0) / recipe.ratings.length
+        ? recipe.ratings.reduce((sum: number, r : {
+          rating : number
+        }) => sum + r.rating, 0) / recipe.ratings.length
         : 0,
   }))
 
@@ -149,12 +151,22 @@ export async function getRecipeById(id: string) {
   }
 
   // Sort ingredients and steps by order_index
-  data.ingredients = data.ingredients.sort((a, b) => a.order_index - b.order_index)
-  data.steps = data.steps.sort((a, b) => a.order_index - b.order_index)
+  data.ingredients = data.ingredients.sort((a : {
+    order_index : number
+  }, b : {
+    order_index : number
+  }) => a.order_index - b.order_index)
+  data.steps = data.steps.sort((a : {
+    order_index : number
+  }, b : {
+    order_index : number
+  }) => a.order_index - b.order_index)
 
   // Calculate average rating
   const averageRating =
-    data.ratings.length > 0 ? data.ratings.reduce((sum: number, r: any) => sum + r.rating, 0) / data.ratings.length : 0
+    data.ratings.length > 0 ? data.ratings.reduce((sum: number, r: {
+      rating : number
+    }) => sum + r.rating, 0) / data.ratings.length : 0
 
   return { ...data, average_rating: averageRating } as Recipe
 }
@@ -239,7 +251,9 @@ export async function searchRecipes(query: string, tags?: string[]) {
 
   // Filter by tags if provided
   if (tags && tags.length > 0) {
-    filteredData = data.filter((recipe) => recipe.tags.some((tag: any) => tags.includes(tag.tag)))
+    filteredData = data.filter((recipe) => recipe.tags.some((tag: {
+      tag : string
+    }) => tags.includes(tag.tag)))
   }
 
   // Calculate average ratings
@@ -247,7 +261,9 @@ export async function searchRecipes(query: string, tags?: string[]) {
     ...recipe,
     average_rating:
       recipe.ratings.length > 0
-        ? recipe.ratings.reduce((sum: number, r: any) => sum + r.rating, 0) / recipe.ratings.length
+        ? recipe.ratings.reduce((sum: number, r: {
+          rating : number
+        }) => sum + r.rating, 0) / recipe.ratings.length
         : 0,
   }))
 

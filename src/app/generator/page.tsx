@@ -166,7 +166,7 @@ export default function RecipeGeneratorPage() {
                   <div
                     key={index}
                     className={`text-center cursor-pointer p-3 rounded-xl transition-all ${
-                      chef.selected ? "bg-orange-500" : "bg-gray-50 hover:bg-gray-100"
+                      selectedChef === chef.name ? "bg-orange-500" : "bg-gray-50 hover:bg-gray-100"
                     }`}
                     onClick={() => setSelectedChef(chef.name)}
                   >

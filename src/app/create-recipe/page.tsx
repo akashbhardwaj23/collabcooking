@@ -55,7 +55,7 @@ export default function CreateRecipePage() {
     setIngredients(ingredients.filter((ing) => ing.id !== id))
   }
 
-  const updateIngredient = (id: string, field: keyof Ingredient, value: any) => {
+  const updateIngredient = (id: string, field: keyof Ingredient, value: string | number) => {
     setIngredients(ingredients.map((ing) => (ing.id === id ? { ...ing, [field]: value } : ing)))
   }
 
@@ -68,7 +68,7 @@ export default function CreateRecipePage() {
     setSteps(steps.filter((step) => step.id !== id))
   }
 
-  const updateStep = (id: string, field: keyof Step, value: any) => {
+  const updateStep = (id: string, field: keyof Step, value: string | number | undefined) => {
     setSteps(steps.map((step) => (step.id === id ? { ...step, [field]: value } : step)))
   }
 
@@ -106,7 +106,7 @@ export default function CreateRecipePage() {
     setCollaboratorEmail("")
   }
 
-  const handleSave = async (isPublic = false) => {
+  const handleSave = async () => {
     if (!user) {
       alert("You must be logged in to save a recipe")
       return
@@ -155,13 +155,13 @@ export default function CreateRecipePage() {
               </Link>
             </div>
             <div className="flex items-center space-x-4">
-              <Button variant="outline" onClick={() => handleSave(false)} disabled={isLoading}>
+              <Button variant="outline" onClick={() => handleSave()} disabled={isLoading}>
                 <Save className="h-4 w-4 mr-2" />
                 Save Draft
               </Button>
               <Button
                 className="bg-orange-500 hover:bg-orange-600"
-                onClick={() => handleSave(true)}
+                onClick={() => handleSave()}
                 disabled={isLoading}
               >
                 <Share2 className="h-4 w-4 mr-2" />
@@ -228,7 +228,7 @@ export default function CreateRecipePage() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium mb-1">Tags (e.g., "Vegan", "Gluten-Free")</label>
+                <label className="block text-sm font-medium mb-1">Tags (e.g., &quot;Vegan&quot;, &quot;Gluten-Free&quot;)</label>
                 <div className="flex flex-wrap gap-2 mb-2">
                   {recipe.tags.map((tag) => (
                     <Badge key={tag} variant="secondary" className="flex items-center gap-1">

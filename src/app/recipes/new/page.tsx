@@ -56,7 +56,7 @@ export default function NewRecipePage() {
     setIngredients(ingredients.filter((ing) => ing.id !== id))
   }
 
-  const updateIngredient = (id: string, field: keyof Ingredient, value: any) => {
+  const updateIngredient = (id: string, field: keyof Ingredient, value : string | number) => {
     setIngredients(ingredients.map((ing) => (ing.id === id ? { ...ing, [field]: value } : ing)))
   }
 
@@ -69,7 +69,7 @@ export default function NewRecipePage() {
     setSteps(steps.filter((step) => step.id !== id))
   }
 
-  const updateStep = (id: string, field: keyof Step, value: any) => {
+  const updateStep = (id: string, field: keyof Step, value: string | number | undefined) => {
     setSteps(steps.map((step) => (step.id === id ? { ...step, [field]: value } : step)))
   }
 
