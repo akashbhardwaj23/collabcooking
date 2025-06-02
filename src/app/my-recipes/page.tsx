@@ -8,7 +8,7 @@ import Link from "next/link"
 
 export default function MyRecipesPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-orange-50 to-red-50 px-4 py-4">
+    <div className="min-h-screen max-w-4xl mx-auto bg-gradient-to-br from-orange-50 to-red-50 px-4 py-4">
       {/* Header exactly as in screenshot */}
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center">
