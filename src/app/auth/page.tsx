@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { useRouter } from "next/navigation"
 import { supabase } from "@/lib/supabase"
+import { Eye, EyeOff } from "lucide-react"
 
 export default function AuthPage() {
   const [isSignUp, setIsSignUp] = useState(true)
@@ -55,10 +56,13 @@ export default function AuthPage() {
     const form = e.target as HTMLFormElement
     const data = new FormData(form)
 
+    // console.log("form ", form);
+    console.log("Form data ", data.getAll('email'))
     setErrors({})
 
     const validationErrors = validateForm(data)
     if (Object.keys(validationErrors).length > 0) {
+      console.log("Error validation ", validationErrors)
       setErrors(validationErrors)
       return
     }
@@ -79,6 +83,7 @@ export default function AuthPage() {
         })
 
         if (authError) {
+          console.log("Auth error ", authError)
           throw new Error(authError.message)
         }
 
@@ -89,6 +94,9 @@ export default function AuthPage() {
             email,
             name,
           })
+
+          console.log("profile created");
+          console.log("supabase error ", profileError)
 
           if (profileError) {
             throw new Error(profileError.message)
@@ -126,19 +134,20 @@ export default function AuthPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-orange-50 to-red-50 flex">
+    <div className="min-h-screen bg-gradient-to-br from-orange-50 to-red-50 flex relative">
       {/* Left Side - Food Images exactly as in screenshot */}
-      <div className="flex-1 relative overflow-hidden">
-        <div className="absolute inset-0">
+      <div className="absolute flex w-full h-full">
+        <div className="w-full h-[60%] imgdiv">
           <img src="/images/food-collage.png" alt="Food Collage" className="w-full h-full object-cover" />
         </div>
       </div>
+      
 
       {/* Right Side - Auth Form exactly as in screenshot */}
-      <div className="flex-1 flex items-center justify-center p-8">
-        <div className="w-full max-w-md">
-          <div className="bg-white rounded-2xl shadow-xl p-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-6 text-center">
+      <div className="absolute flex items-center justify-center font-roboto inset-8">
+        <div className="w-full max-w-sm">
+          <div className="bg-white rounded-4xl shadow-xl px-4 py-6 font-medium">
+            <h2 className="text-2xl font-bold text-[#64A67E] mb-6">
               {isSignUp ? "Let's Sign Up" : "Let's Sign In"}
             </h2>
 
@@ -161,7 +170,7 @@ export default function AuthPage() {
                     name="name"
                     type="text"
                     placeholder="Username"
-                    className={`h-12 border-gray-200 rounded-xl ${errors.name ? "border-red-300" : ""}`}
+                    className={`h-12 border-0 rounded-md bg-[#FFF8F4] focus-visible:border-orange-400 focus-visible:border-3 ${errors.name ? "border-red-300" : ""}`}
                     required
                   />
                   {errors.name && <p className="mt-1 text-sm text-red-600">{errors.name}</p>}
@@ -173,32 +182,38 @@ export default function AuthPage() {
                   name="email"
                   type="email"
                   placeholder="Email"
-                  className={`h-12 border-gray-200 rounded-xl ${errors.email ? "border-red-300" : ""}`}
+                  className={`h-12 border-0 rounded-md bg-[#FFF8F4] focus-visible:border-orange-400 focus-visible:border-3 ${errors.email ? "border-red-300" : ""}`}
                   required
                 />
                 {errors.email && <p className="mt-1 text-sm text-red-600">{errors.email}</p>}
               </div>
 
-              <div>
+              <div className="relative">
                 <Input
                   name="password"
                   type="password"
                   placeholder="Password"
-                  className={`h-12 border-gray-200 rounded-xl ${errors.password ? "border-red-300" : ""}`}
+                  className={`h-12 border-0 rounded-md bg-[#FFF8F4] focus-visible:border-orange-400 focus-visible:border-3 ${errors.password ? "border-red-300" : ""}`}
                   required
                 />
+                <div className="absolute top-3 right-3 cursor-pointer">
+                <Eye />
+                </div>
                 {errors.password && <p className="mt-1 text-sm text-red-600">{errors.password}</p>}
               </div>
 
               {isSignUp && (
-                <div>
+                <div className="relative">
                   <Input
                     name="confirmPassword"
                     type="password"
                     placeholder="Confirm Password"
-                    className={`h-12 border-gray-200 rounded-xl ${errors.confirmPassword ? "border-red-300" : ""}`}
+                    className={`h-12 border-0 rounded-md bg-[#FFF8F4] focus-visible:border-orange-400 focus-visible:border-3 ${errors.confirmPassword ? "border-red-300" : ""}`}
                     required
                   />
+                   <div className="absolute top-3 right-3 cursor-pointer">
+                   <EyeOff />
+                </div>
                   {errors.confirmPassword && <p className="mt-1 text-sm text-red-600">{errors.confirmPassword}</p>}
                 </div>
               )}
@@ -214,16 +229,19 @@ export default function AuthPage() {
               <Button
                 type="submit"
                 disabled={isLoading}
-                className="w-full h-12 bg-orange-500 hover:bg-orange-600 rounded-xl text-white font-medium disabled:opacity-50"
+                className="w-full h-12 bg-gradient-to-r from-orange-400 to-orange-600 hover:bg-orange-600 rounded-xl text-white font-bold cursor-pointer disabled:opacity-50"
               >
                 {isLoading ? "Loading..." : isSignUp ? "Sign Up" : "Sign In"}
               </Button>
             </form>
 
-            <div className="mt-6 text-center">
-              <p className="text-gray-500 mb-4">Or</p>
-              <Button variant="outline" className="w-full h-12 rounded-xl border-gray-200">
-                <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24">
+           
+          </div>
+
+           <div className="mt-6 text-center">
+              <p className="text-gray-500 mb-4 line w-full">Or</p>
+              <Button variant="outline" className="w-full h-12 rounded-xl border-0 justify-start text-black/60 font-bold cursor-pointer border-gray-200 hover:text-black/70">
+                <svg className="w-10 h-10" viewBox="0 0 24 24">
                   <path
                     fill="#4285F4"
                     d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
@@ -254,14 +272,13 @@ export default function AuthPage() {
                     setIsSignUp(!isSignUp)
                     setErrors({})
                   }}
-                  className="text-orange-500 hover:text-orange-600 font-medium"
+                  className="text-orange-400 hover:text-orange-600 font-bold cursor-pointer"
                 >
                   {isSignUp ? "Sign In" : "Sign Up"}
                 </button>{" "}
                 now
               </p>
             </div>
-          </div>
         </div>
       </div>
     </div>
