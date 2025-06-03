@@ -7,7 +7,7 @@ import { motion } from "motion/react"
 
 export default function SplashPage() {
   const router = useRouter()
-  const { user, loading } = useAuth()
+  const { user } = useAuth()
   const [animationComplete, setAnimationComplete] = useState(false)
 
   useEffect(() => {
@@ -21,9 +21,9 @@ export default function SplashPage() {
 
   useEffect(() => {
     //check if the loading is happening
-    console.log("loading ", loading)
+    // console.log("loading ", loading)
     // Only redirect after animation completes and auth is checked
-    if (animationComplete && !loading) {
+    if (animationComplete) {
       const redirectTimer = setTimeout(() => {
         if (user) {
           router.push("/home")
@@ -34,7 +34,7 @@ export default function SplashPage() {
 
       return () => clearTimeout(redirectTimer)
     }
-  }, [animationComplete, loading, user, router])
+  }, [animationComplete, user, router])
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-orange-50 to-red-50 flex items-center justify-center relative overflow-hidden">
