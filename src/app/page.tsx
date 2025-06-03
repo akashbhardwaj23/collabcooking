@@ -20,6 +20,8 @@ export default function SplashPage() {
   }, [])
 
   useEffect(() => {
+    //check if the loading is happening
+    console.log("loading ", loading)
     // Only redirect after animation completes and auth is checked
     if (animationComplete && !loading) {
       const redirectTimer = setTimeout(() => {

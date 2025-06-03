@@ -291,7 +291,9 @@ export default function HomePage() {
       <div className="fixed left-4 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-2 shadow-lg">
         <div className="flex flex-col items-center space-y-30 py-4">
           <motion.div
-            layoutId="sidebar"
+          initial={{
+            display : isSidebarClosed ? "none" : 'flex'
+          }}
             animate={{
                 display: isSidebarClosed ? "none" : "flex"
             }}

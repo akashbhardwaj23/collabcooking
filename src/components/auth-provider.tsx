@@ -50,7 +50,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const fetchUserProfile = async (userId: string) => {
     try {
       const { data, error } = await supabase.from("users").select("*").eq("id", userId).single()
-
+      console.log("error is ", error)
       if (error) throw error
       setUser(data)
     } catch (error) {
