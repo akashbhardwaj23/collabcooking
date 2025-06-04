@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { ArrowLeft } from "lucide-react"
+import { ArrowLeft, ChevronLeft, SquareChevronLeft } from "lucide-react"
 import Link from "next/link"
 
 export default function SubscriptionPage() {
@@ -14,23 +14,25 @@ export default function SubscriptionPage() {
       <div className="max-w-4xl mx-auto px-4 py-8">
         {/* Header exactly as in screenshot */}
         <div className="flex items-center mb-8">
-          <div className="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center mr-3">
-            <span className="text-white text-lg">🔥</span>
+          <Link href="/profile">
+          <div className="w-10 h-10 flex items-center justify-center mr-1">
+          <SquareChevronLeft className="text-neutral-600" />
           </div>
-          <h1 className="text-2xl font-bold text-gray-900">Subscription plans</h1>
+          </Link>
+          <h1 className="text-2xl font-bold text-[#FC8801]">Subscription plans</h1>
         </div>
-
+{/* 
         <div className="mb-6">
           <Link href="/profile" className="inline-flex items-center text-gray-600 hover:text-gray-900">
             <ArrowLeft className="h-4 w-4 mr-2" />
             Back to Profile
           </Link>
-        </div>
+        </div> */}
 
         {/* Layout exactly as in screenshot */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <div className="md:col-span-2">
-            <Card className="bg-white rounded-2xl shadow-sm overflow-hidden h-full">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 md:h-[40rem]">
+          <div className="md:col-span-2 h-full">
+            <Card className="bg-white rounded-xl border-none shadow-xl overflow-hidden h-full">
               <CardContent className="p-0 h-full">
                 <div className="flex items-center justify-center h-full">
                   <p className="text-gray-500 text-center">Feature explanation graphic here</p>
@@ -39,7 +41,7 @@ export default function SubscriptionPage() {
             </Card>
           </div>
           <div>
-            <Card className="bg-white rounded-2xl shadow-sm h-full">
+            <Card className="bg-white border-none rounded-xl shadow-xl h-full">
               <CardContent className="p-6 flex flex-col h-full justify-between">
                 <div>
                   <h2 className="text-xl font-semibold text-gray-900 mb-4">Premium Features</h2>
@@ -84,49 +86,49 @@ export default function SubscriptionPage() {
           </div>
         </div>
 
-        <p className="text-gray-700 mb-4">Pick a plan</p>
+        <p className="text-[#64A67E] font-bold mb-4">Pick a plan</p>
 
         {/* Plan cards exactly as in screenshot */}
-        <div className="grid grid-cols-2 gap-4 mb-6">
+        <div className="grid grid-cols-2 mb-6 items-center">
           <Card
-            className={`bg-white rounded-2xl shadow-sm cursor-pointer ${
-              selectedPlan === "monthly" ? "border-2 border-orange-500" : ""
+            className={`bg-white relative w-52 h-32 rounded-4xl shadow-sm cursor-pointer ${
+              selectedPlan === "monthly" ? "bg-orange-500" : ""
             }`}
             onClick={() => setSelectedPlan("monthly")}
           >
-            <CardContent className="p-4">
-              <div className="bg-orange-100 text-orange-600 text-xs font-medium px-2 py-1 rounded-full inline-block mb-2">
+            <CardContent>
+              <div className="absolute right-1 -top-2 bg-orange-100 text-orange-600 text-xs font-medium px-2 py-1 rounded-full inline-block mb-2">
                 Save 50%
               </div>
-              <div className="flex items-baseline">
-                <span className="text-gray-400 text-sm line-through mr-1">₹99.00</span>
-                <span className="text-2xl font-bold text-gray-900">₹ 49.00</span>
+              <div className="flex flex-col items-baseline">
+                <span className={`text-sm line-through mr-1 ${selectedPlan === "monthly" ? "text-white/70" : "text-gray-400 "}`}>₹99.00</span>
+                <span className={`text-2xl font-bold  ${selectedPlan === "monthly" ? "text-white" : "text-gray-900"}`}>₹ 49.00</span>
               </div>
-              <p className="text-gray-500 text-sm">per month</p>
+              <p className={`text-sm ${selectedPlan === "monthly" ? "text-white/80" : "text-gray-500 "}`}>per month</p>
             </CardContent>
           </Card>
 
           <Card
-            className={`bg-white rounded-2xl shadow-sm cursor-pointer ${
-              selectedPlan === "yearly" ? "border-2 border-orange-500" : ""
+            className={`bg-white relative w-52 h-32 rounded-4xl shadow-sm cursor-pointer ${
+              selectedPlan === "yearly" ? "bg-orange-500" : ""
             }`}
             onClick={() => setSelectedPlan("yearly")}
           >
-            <CardContent className="p-4">
-              <div className="bg-orange-100 text-orange-600 text-xs font-medium px-2 py-1 rounded-full inline-block mb-2">
+            <CardContent>
+              <div className="absolute right-1 -top-2 bg-orange-100 text-orange-600 text-xs font-medium px-2 py-1 rounded-full inline-block mb-2">
                 Save 25%
               </div>
-              <div className="flex items-baseline">
-                <span className="text-gray-400 text-sm line-through mr-1">₹599.00</span>
-                <span className="text-2xl font-bold text-gray-900">₹ 499.00</span>
+              <div className="flex flex-col items-baseline">
+                <span className={`text-sm line-through mr-1 ${selectedPlan === "yearly" ? "text-white/70" : "text-gray-400 "}`}>₹599.00</span>
+                <span className={`text-2xl font-bold ${selectedPlan === "yearly" ? "text-white" : "text-gray-900"}`}>₹ 499.00</span>
               </div>
-              <p className="text-gray-500 text-sm">per year</p>
+              <p className={`text-sm ${selectedPlan === "yearly" ? "text-white/80" : "text-gray-500 "}`}>per year</p>
             </CardContent>
           </Card>
         </div>
 
         {/* Subscribe button exactly as in screenshot */}
-        <Button className="w-full h-14 bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-2xl text-lg">
+        <Button className="w-full h-14 bg-gradient-to-r from-orange-400 to-orange-600 hover:bg-orange-600 text-white font-semibold rounded-2xl text-lg">
           Subscribe Now
         </Button>
       </div>

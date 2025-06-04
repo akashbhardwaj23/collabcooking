@@ -56,15 +56,22 @@
   mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
 }
 
-.line::before,
-.line::after {
+.line-center::before,
+.line-center::after {
   content: "";
-  height: 10px;
-  width: 200px;
-  background-color: red;
-  border-bottom: 2px solid #000;
+  flex : 1 1;
+  border-bottom: 1px solid #012B13;
   margin: auto;
 }
+
+.line-center::before {
+  margin-right: 10px;
+}
+
+.line-center::after {
+  margin-left: 10px;
+}
+
 
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);

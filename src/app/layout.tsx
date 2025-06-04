@@ -4,6 +4,7 @@ import { Roboto } from 'next/font/google'
 import "./globals.css"
 import { AuthProvider } from "@/components/auth-provider"
 import ThemeProvider from "@/components/theme-provider"
+import SidebarProvider from "@/components/sidebar-provider"
 
 export const metadata: Metadata = {
   title: "CuisineQuest",
@@ -27,7 +28,9 @@ export default function RootLayout({
       <body className={`bg-gradient-to-br ${roboto.className} from-orange-50 to-red-50 min-h-screen`}>
       <AuthProvider>
         <ThemeProvider attribute="class" defaultTheme="light">
+          <SidebarProvider>
           {children}
+          </SidebarProvider>
         </ThemeProvider>
       </AuthProvider>
       </body>

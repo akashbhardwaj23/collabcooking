@@ -4,9 +4,10 @@ import type React from "react"
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { useRouter } from "next/navigation"
+import { redirect, useRouter } from "next/navigation"
 import { supabase } from "@/lib/supabase"
 import { Eye, EyeOff } from "lucide-react"
+import { useAuth } from "@/components/auth-provider"
 
 export default function AuthPage() {
   const [isSignUp, setIsSignUp] = useState(true)
@@ -18,6 +19,7 @@ export default function AuthPage() {
     general?: string
   }>({})
   const [isLoading, setIsLoading] = useState(false)
+  const {user} = useAuth();
   const router = useRouter()
 
   const validateForm = (formData: FormData) => {
@@ -133,6 +135,12 @@ export default function AuthPage() {
     }
   }
 
+
+  if(user){
+    redirect('/')
+  }
+
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-orange-50 to-red-50 flex relative">
       {/* Left Side - Food Images exactly as in screenshot */}
@@ -239,7 +247,7 @@ export default function AuthPage() {
           </div>
 
            <div className="mt-6 text-center">
-              <p className="text-gray-500 mb-4 line w-full">Or</p>
+              <p className="flex text-gray-500 mb-4 line-center w-full">Or</p>
               <Button variant="outline" className="w-full h-12 rounded-xl border-0 justify-start text-black/60 font-bold cursor-pointer border-gray-200 hover:text-black/70">
                 <svg className="w-10 h-10" viewBox="0 0 24 24">
                   <path
