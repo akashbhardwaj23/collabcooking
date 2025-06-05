@@ -88,14 +88,10 @@ export default function CreateRecipePage() {
       alert("Please enter a valid email address")
       return
     }
-
-    // Check if already invited
     if (collaborators.some((c) => c.email === collaboratorEmail)) {
       alert("This email has already been invited")
       return
     }
-
-    // In a real app, this would send an invitation to the email
     setCollaborators([
       ...collaborators,
       {
@@ -130,7 +126,6 @@ export default function CreateRecipePage() {
     setIsLoading(true)
 
     try {
-      // In a real app, this would save to the database
       setTimeout(() => {
         setIsLoading(false)
         alert("Recipe saved successfully!")
@@ -145,22 +140,21 @@ export default function CreateRecipePage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-orange-50 to-red-50">
-      {/* Header */}
-      <header className="bg-white shadow-sm border-b">
+      <header>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-4">
               <Link href="/home" className="flex items-center space-x-2">
-                <span className="text-2xl font-bold text-gray-900">Create Recipe</span>
+                <span className="text-xl md:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-orange-600">Create Recipe</span>
               </Link>
             </div>
             <div className="flex items-center space-x-4">
-              <Button variant="outline" onClick={() => handleSave()} disabled={isLoading}>
+              <Button variant="outline" className="hidden md:flex" onClick={() => handleSave()} disabled={isLoading}>
                 <Save className="h-4 w-4 mr-2" />
                 Save Draft
               </Button>
               <Button
-                className="bg-orange-500 hover:bg-orange-600"
+                className="bg-gradient-to-r from-orange-400 to-orange-600 hover:bg-orange-600"
                 onClick={() => handleSave()}
                 disabled={isLoading}
               >
@@ -173,18 +167,10 @@ export default function CreateRecipePage() {
       </header>
 
       <div className="max-w-4xl mx-auto p-6">
-        <div className="mb-6">
-          <Link href="/my-recipes" className="inline-flex items-center text-gray-600 hover:text-gray-900">
-            <ArrowLeft className="h-4 w-4 mr-2" />
-            Back to My Recipes
-          </Link>
-        </div>
-
         <div className="space-y-6">
-          {/* Basic Info */}
-          <Card>
+          <Card className="bg-transparent">
             <CardHeader>
-              <CardTitle>Recipe Details</CardTitle>
+              <CardTitle className="text-[#64A67E]">Recipe Details</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div>
@@ -202,6 +188,7 @@ export default function CreateRecipePage() {
                 <Textarea
                   placeholder="Describe your recipe..."
                   value={recipe.description}
+                  className="focus:outline-none focus:ring-2 focus:ring-orange-400"
                   onChange={(e) => setRecipe({ ...recipe, description: e.target.value })}
                 />
               </div>
@@ -222,6 +209,7 @@ export default function CreateRecipePage() {
                   <Input
                     placeholder="e.g., 30 minutes"
                     value={recipe.cookTime}
+                    className="focus:ring-orange-400"
                     onChange={(e) => setRecipe({ ...recipe, cookTime: e.target.value })}
                   />
                 </div>
@@ -237,28 +225,28 @@ export default function CreateRecipePage() {
                     </Badge>
                   ))}
                 </div>
-                <div className="flex gap-2">
+                <div className="flex gap-2 mb-2">
                   <Input
                     placeholder="Add a tag..."
                     value={newTag}
                     onChange={(e) => setNewTag(e.target.value)}
                     onKeyPress={(e) => e.key === "Enter" && addTag()}
                   />
-                  <Button type="button" onClick={addTag}>
+                 
+                </div>
+                <Button type="button" className="w-full bg-gradient-to-r from-orange-400 to-orange-600" onClick={addTag}>
                     Add
                   </Button>
-                </div>
               </div>
             </CardContent>
           </Card>
 
-          {/* Ingredients with Scaling */}
-          <Card>
+          <Card className="bg-transparent">
             <CardHeader>
               <CardTitle className="flex items-center justify-between">
-                Ingredients (Auto-scaling enabled)
-                <Button onClick={addIngredient} size="sm">
-                  <Plus className="h-4 w-4 mr-2" />
+                <span className="text-[#64A67E]">Ingredients (Auto-scaling enabled)</span>
+                <Button onClick={addIngredient} className="bg-gradient-to-r from-orange-400 to-orange-600" size="sm">
+                  <Plus className="h-4 w-4" />
                   Add Ingredient
                 </Button>
               </CardTitle>
@@ -317,14 +305,12 @@ export default function CreateRecipePage() {
               </div>
             </CardContent>
           </Card>
-
-          {/* Step-by-Step Instructions with Timers */}
-          <Card>
+          <Card className="bg-transparent">
             <CardHeader>
               <CardTitle className="flex items-center justify-between">
-                Step-by-Step Instructions
-                <Button onClick={addStep} size="sm">
-                  <Plus className="h-4 w-4 mr-2" />
+                <span className="text-[#64A67E]">Step-by-Step Instructions</span>
+                <Button onClick={addStep} className="bg-gradient-to-r from-orange-400 to-orange-600" size="sm">
+                  <Plus className="h-4 w-4" />
                   Add Step
                 </Button>
               </CardTitle>
@@ -368,10 +354,9 @@ export default function CreateRecipePage() {
             </CardContent>
           </Card>
 
-          {/* Collaboration */}
-          <Card>
+          <Card className="bg-transparent">
             <CardHeader>
-              <CardTitle>Collaboration Settings</CardTitle>
+              <CardTitle className="text-[#64A67E]">Collaboration Settings</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
@@ -384,7 +369,7 @@ export default function CreateRecipePage() {
                       value={collaboratorEmail}
                       onChange={(e) => setCollaboratorEmail(e.target.value)}
                     />
-                    <Button type="button" onClick={inviteCollaborator}>
+                    <Button type="button" className="bg-gradient-to-r from-orange-400 to-orange-600" onClick={inviteCollaborator}>
                       <Users className="h-4 w-4 mr-2" />
                       Invite
                     </Button>

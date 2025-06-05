@@ -75,11 +75,11 @@ export default function HomePage() {
       <Navbar />
 
         {/* Greeting exactly as in screenshot */}
-        <div className="mb-6 font-roboto">
+        <div className="mb-6 font-roboto ml-16 md:ml-0">
           <h1 className="text-2xl font-semibold text-[#64A67E] mb-1">
             Hello <span className="text-orange-500">{user?.name}</span>,
           </h1>
-          <p className="text-xl text-[#64A67E]">
+          <p className="text-xl text-[#64A67E] font-bold">
             what do you want to cook today?
           </p>
         </div>
@@ -109,7 +109,7 @@ export default function HomePage() {
               View all
             </Link>
           </div>
-          <div className="flex space-x-6">
+          <div className="flex space-x-6 overflow-hidden">
             {topChefs.map((chef, index) => (
               <div
                 key={index}
@@ -184,7 +184,7 @@ export default function HomePage() {
         </div>
 
         {/* Featured Programs exactly as in screenshot */}
-        <div className="space-y-4 relative">
+        <div className="space-y-4 relative md:block hidden">
           <Card className="bg-[url(/images/soup-bowl-1.png)] bg-no-repeat bg-red-700 bg-contain bg-center text-white rounded-4xl overflow-hidden">
             <CardContent className="p-6 flex items-center justify-between">
               <div>

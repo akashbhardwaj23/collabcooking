@@ -18,7 +18,7 @@ export default function Navbar() {
         }`}
       >
         <div className="flex items-center space-x-3">
-          <div className="w-20 h-20 rounded-full flex items-center justify-center">
+          <div className="w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center">
             <Image
               src={"/images/naruto-avatar.png"}
               width={400}
@@ -39,7 +39,7 @@ export default function Navbar() {
         </div>
 
         {pathname === "/home" && (
-          <div className="flex-1 max-w-4xl mx-8">
+          <div className="hidden md:flex-1 max-w-4xl mx-8">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
               <Input

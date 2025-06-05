@@ -1,26 +1,24 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { ArrowLeft, Heart, Share, Clock, Users, Scale } from "lucide-react"
-import Link from "next/link"
-import { Timer } from "@/components/timer"
-import { useParams } from "next/navigation"
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Heart, Share, Clock, Users, Scale, SquareChevronLeft } from "lucide-react";
+import Link from "next/link";
+import { Timer } from "@/components/timer";
+import { useParams } from "next/navigation";
 
 export default function RecipeDetailPage() {
-  const params = useParams()
+  const params = useParams();
   const id = params.id as string;
-  const [liked, setLiked] = useState(false)
-  const [servings, setServings] = useState(4)
-  const [currentStep, setCurrentStep] = useState(0)
-  const [showCollaborators, setShowCollaborators] = useState(false)
-  const [newCollaboratorEmail, setNewCollaboratorEmail] = useState("")
+  const [liked, setLiked] = useState(false);
+  const [servings, setServings] = useState(4);
+  const [currentStep, setCurrentStep] = useState(0);
+  const [showCollaborators, setShowCollaborators] = useState(false);
+  const [newCollaboratorEmail, setNewCollaboratorEmail] = useState("");
 
-
-  // Recipe data - in a real app, this would be fetched from the database
   const recipe = {
     id: id,
     title: "Buttery Croissants",
@@ -47,23 +45,28 @@ export default function RecipeDetailPage() {
     ],
     steps: [
       {
-        instruction: "In a large bowl, dissolve yeast and sugar in warm water. Let stand for 5 minutes until foamy.",
+        instruction:
+          "In a large bowl, dissolve yeast and sugar in warm water. Let stand for 5 minutes until foamy.",
         timer: 5,
       },
       {
-        instruction: "Add flour and salt to the yeast mixture. Mix until a dough forms.",
+        instruction:
+          "Add flour and salt to the yeast mixture. Mix until a dough forms.",
         timer: 0,
       },
       {
-        instruction: "Knead the dough on a floured surface for 8-10 minutes until smooth and elastic.",
+        instruction:
+          "Knead the dough on a floured surface for 8-10 minutes until smooth and elastic.",
         timer: 10,
       },
       {
-        instruction: "Place dough in a greased bowl, cover, and let rise in a warm place for 1 hour.",
+        instruction:
+          "Place dough in a greased bowl, cover, and let rise in a warm place for 1 hour.",
         timer: 60,
       },
       {
-        instruction: "Roll out the dough into a rectangle. Place cold butter in the center and fold the dough over it.",
+        instruction:
+          "Roll out the dough into a rectangle. Place cold butter in the center and fold the dough over it.",
         timer: 0,
       },
       {
@@ -72,73 +75,91 @@ export default function RecipeDetailPage() {
         timer: 30,
       },
       {
-        instruction: "Roll out the dough into a large rectangle and cut into triangles.",
+        instruction:
+          "Roll out the dough into a large rectangle and cut into triangles.",
         timer: 0,
       },
       {
-        instruction: "Roll each triangle from the wide end towards the point. Shape into crescents.",
+        instruction:
+          "Roll each triangle from the wide end towards the point. Shape into crescents.",
         timer: 0,
       },
       {
-        instruction: "Place on a baking sheet, brush with egg wash, and let rise for 30 minutes.",
+        instruction:
+          "Place on a baking sheet, brush with egg wash, and let rise for 30 minutes.",
         timer: 30,
       },
       {
-        instruction: "Preheat oven to 375°F (190°C) and bake for 15-20 minutes until golden brown.",
+        instruction:
+          "Preheat oven to 375°F (190°C) and bake for 15-20 minutes until golden brown.",
         timer: 18,
       },
     ],
     tags: ["French", "Breakfast", "Pastry"],
-  }
+  };
 
-  // Auto-scale ingredients based on servings
   const scaledIngredients = recipe.ingredients.map((ingredient) => ({
     ...ingredient,
     amount: (ingredient.amount * servings) / recipe.originalServings,
-  }))
+  }));
 
   const formatAmount = (amount: number) => {
-    return amount % 1 === 0 ? amount.toString() : amount.toFixed(2)
-  }
+    return amount % 1 === 0 ? amount.toString() : amount.toFixed(2);
+  };
 
   const handleInviteCollaborator = () => {
     if (!newCollaboratorEmail || !newCollaboratorEmail.includes("@")) {
-      alert("Please enter a valid email address")
-      return
+      alert("Please enter a valid email address");
+      return;
     }
 
-    // In a real app, this would send an invitation to the email
-    alert(`Invitation sent to ${newCollaboratorEmail}`)
-    setNewCollaboratorEmail("")
-  }
+    alert(`Invitation sent to ${newCollaboratorEmail}`);
+    setNewCollaboratorEmail("");
+  };
 
   return (
-    <div className="min-h-screen max-w-7xl mx-auto bg-gradient-to-br from-orange-50 to-red-50 px-4 py-4">
-      {/* Header with back button and action buttons */}
+    <div className="min-h-screen max-w-7xl mx-auto bg-gradient-to-br from-orange-50 to-red-50">
+      <div className="max-w-4xl mx-auto px-4 py-8">
       <div className="flex items-center justify-between mb-4">
-        <Link href="/home" className="inline-flex items-center text-gray-600 hover:text-gray-900">
-          <ArrowLeft className="h-4 w-4 mr-2" />
+        <Link
+          href="/home"
+          className="inline-flex items-center text-gray-600 hover:text-gray-900"
+        >
+          <div className="w-10 h-10 flex items-center justify-center mr-1">
+            <SquareChevronLeft className="text-neutral-600" />
+          </div>
         </Link>
 
         <div className="flex items-center space-x-2">
           <Button
             variant="outline"
             size="icon"
-            className="h-8 w-8 rounded-full bg-white border-gray-200"
+            className="h-8 w-8 bg-transparent border-none shadow-none"
             onClick={() => setLiked(!liked)}
           >
-            <Heart className={`h-4 w-4 ${liked ? "fill-red-500 text-red-500" : "text-gray-600"}`} />
+            <Heart
+              className={`h-4 w-4 ${
+                liked ? "fill-red-500 text-red-500" : "text-gray-600"
+              }`}
+            />
           </Button>
-          <Button variant="outline" size="icon" className="h-8 w-8 rounded-full bg-white border-gray-200">
+          <Button
+            variant="outline"
+            size="icon"
+            className="h-8 w-8 bg-transparent border-none shadow-none"
+          >
             <Share className="h-4 w-4 text-gray-600" />
           </Button>
         </div>
       </div>
 
-      {/* Recipe image */}
-      <Card className="bg-white rounded-xl shadow-sm overflow-hidden mb-4">
+      <Card className="bg-transparent rounded-xl shadow-sm overflow-hidden mb-4">
         <div className="relative">
-          <img src="/images/croissant.png" alt="Recipe" className="w-full h-48 object-cover" />
+          <img
+            src="/images/croissant.png"
+            alt="Recipe"
+            className="w-full h-48 object-cover"
+          />
           <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
             <h1 className="text-white text-xl font-semibold">{recipe.title}</h1>
             <p className="text-white/90 text-sm">{recipe.description}</p>
@@ -150,7 +171,9 @@ export default function RecipeDetailPage() {
       <Card className="bg-white rounded-xl shadow-sm mb-4">
         <CardContent className="p-4">
           <div className="flex items-center justify-between mb-3">
-            <h2 className="text-green-600 font-medium text-sm">Recipe Curator</h2>
+            <h2 className="text-green-600 font-medium text-sm">
+              Recipe Curator
+            </h2>
             <Button
               variant="ghost"
               size="sm"
@@ -164,7 +187,10 @@ export default function RecipeDetailPage() {
 
           <div className="flex items-center mb-3">
             <Avatar className="h-10 w-10 mr-3">
-              <AvatarImage src={recipe.author.avatar || "/placeholder.svg"} alt={recipe.author.name} />
+              <AvatarImage
+                src={recipe.author.avatar || "/placeholder.svg"}
+                alt={recipe.author.name}
+              />
               <AvatarFallback>{recipe.author.name.charAt(0)}</AvatarFallback>
             </Avatar>
             <div>
@@ -179,10 +205,18 @@ export default function RecipeDetailPage() {
                 <p className="text-xs text-gray-500 mb-2">Collaborators:</p>
                 <div className="flex flex-wrap gap-2">
                   {recipe.collaborators.map((collaborator, index) => (
-                    <div key={index} className="flex items-center bg-gray-50 rounded-full px-2 py-1">
+                    <div
+                      key={index}
+                      className="flex items-center bg-gray-50 rounded-full px-2 py-1"
+                    >
                       <Avatar className="h-6 w-6 mr-2">
-                        <AvatarImage src={collaborator.avatar || "/placeholder.svg"} alt={collaborator.name} />
-                        <AvatarFallback>{collaborator.name.charAt(0)}</AvatarFallback>
+                        <AvatarImage
+                          src={collaborator.avatar || "/placeholder.svg"}
+                          alt={collaborator.name}
+                        />
+                        <AvatarFallback>
+                          {collaborator.name.charAt(0)}
+                        </AvatarFallback>
                       </Avatar>
                       <span className="text-xs">{collaborator.name}</span>
                     </div>
@@ -191,7 +225,9 @@ export default function RecipeDetailPage() {
               </div>
 
               <div className="border-t border-gray-100 pt-3">
-                <p className="text-xs text-gray-500 mb-2">Invite a collaborator:</p>
+                <p className="text-xs text-gray-500 mb-2">
+                  Invite a collaborator:
+                </p>
                 <div className="flex gap-2">
                   <input
                     type="email"
@@ -200,7 +236,11 @@ export default function RecipeDetailPage() {
                     onChange={(e) => setNewCollaboratorEmail(e.target.value)}
                     className="flex-1 text-xs px-3 py-2 border border-gray-200 rounded-lg"
                   />
-                  <Button size="sm" onClick={handleInviteCollaborator} className="bg-orange-500 hover:bg-orange-600">
+                  <Button
+                    size="sm"
+                    onClick={handleInviteCollaborator}
+                    className="bg-orange-500 hover:bg-orange-600"
+                  >
                     Invite
                   </Button>
                 </div>
@@ -236,7 +276,8 @@ export default function RecipeDetailPage() {
           </div>
 
           <p className="text-xs text-gray-500 mb-2">
-            Original recipe serves {recipe.originalServings}. Ingredients automatically scaled.
+            Original recipe serves {recipe.originalServings}. Ingredients
+            automatically scaled.
           </p>
 
           <ul className="space-y-1">
@@ -244,7 +285,8 @@ export default function RecipeDetailPage() {
               <li key={index} className="flex items-start text-xs">
                 <span className="text-gray-400 mr-1 mt-0.5">•</span>
                 <span className="text-gray-700 leading-relaxed">
-                  {formatAmount(ingredient.amount)} {ingredient.unit} {ingredient.name}
+                  {formatAmount(ingredient.amount)} {ingredient.unit}{" "}
+                  {ingredient.name}
                 </span>
               </li>
             ))}
@@ -255,14 +297,18 @@ export default function RecipeDetailPage() {
       {/* Step-by-Step Instructions with Timers */}
       <Card className="bg-white rounded-xl shadow-sm mb-4">
         <CardContent className="p-4">
-          <h2 className="text-green-600 font-medium text-sm mb-3">Step-by-Step Instructions</h2>
+          <h2 className="text-green-600 font-medium text-sm mb-3">
+            Step-by-Step Instructions
+          </h2>
 
           <div className="space-y-4">
             {recipe.steps.map((step, index) => (
               <div
                 key={index}
                 className={`border rounded-lg p-3 ${
-                  currentStep === index ? "border-orange-500 bg-orange-50" : "border-gray-200"
+                  currentStep === index
+                    ? "border-orange-500 bg-orange-50"
+                    : "border-gray-200"
                 }`}
               >
                 <div className="flex justify-between items-start mb-2">
@@ -282,7 +328,7 @@ export default function RecipeDetailPage() {
                     minutes={step.timer}
                     onComplete={() => {
                       if (index < recipe.steps.length - 1) {
-                        setCurrentStep(index + 1)
+                        setCurrentStep(index + 1);
                       }
                     }}
                     className="mb-3"
@@ -301,7 +347,11 @@ export default function RecipeDetailPage() {
                   </Button>
                   <Button
                     size="sm"
-                    onClick={() => setCurrentStep(Math.min(recipe.steps.length - 1, index + 1))}
+                    onClick={() =>
+                      setCurrentStep(
+                        Math.min(recipe.steps.length - 1, index + 1)
+                      )
+                    }
                     disabled={index === recipe.steps.length - 1}
                     className="bg-orange-500 hover:bg-orange-600 text-xs"
                   >
@@ -317,11 +367,16 @@ export default function RecipeDetailPage() {
       {/* Tags */}
       <div className="flex flex-wrap gap-2 mb-4">
         {recipe.tags.map((tag, index) => (
-          <Badge key={index} variant="secondary" className="bg-gray-100 text-gray-700 text-xs">
+          <Badge
+            key={index}
+            variant="secondary"
+            className="bg-gray-100 text-gray-700 text-xs"
+          >
             {tag}
           </Badge>
         ))}
       </div>
+      </div>
     </div>
-  )
+  );
 }

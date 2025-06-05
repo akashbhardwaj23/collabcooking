@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import { useAuth } from "@/components/auth-provider"
 import { motion } from "motion/react"
+import { Logo } from "@/utils/icons"
 
 export default function SplashPage() {
   const router = useRouter()
@@ -90,15 +91,7 @@ export default function SplashPage() {
               ease: "easeInOut",
             }}
           >
-            <span className="text-white text-3xl">🔥</span>
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5 }}
-            className="text-2xl"
-          >
-            👨‍🍳
+            <Logo className="text-white text-3xl" />
           </motion.div>
         </motion.div>
 

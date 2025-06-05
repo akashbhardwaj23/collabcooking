@@ -12,7 +12,6 @@ export default function SubscriptionPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-orange-50 to-red-50">
       <div className="max-w-4xl mx-auto px-4 py-8">
-        {/* Header exactly as in screenshot */}
         <div className="flex items-center mb-8">
           <Link href="/profile">
           <div className="w-10 h-10 flex items-center justify-center mr-1">
@@ -21,15 +20,6 @@ export default function SubscriptionPage() {
           </Link>
           <h1 className="text-2xl font-bold text-[#FC8801]">Subscription plans</h1>
         </div>
-{/* 
-        <div className="mb-6">
-          <Link href="/profile" className="inline-flex items-center text-gray-600 hover:text-gray-900">
-            <ArrowLeft className="h-4 w-4 mr-2" />
-            Back to Profile
-          </Link>
-        </div> */}
-
-        {/* Layout exactly as in screenshot */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 md:h-[40rem]">
           <div className="md:col-span-2 h-full">
             <Card className="bg-white rounded-xl border-none shadow-xl overflow-hidden h-full">
@@ -73,7 +63,6 @@ export default function SubscriptionPage() {
           </div>
         </div>
 
-        {/* Progress dots exactly as in screenshot */}
         <div className="flex justify-center mb-6">
           <div className="flex space-x-2">
             <div
@@ -88,10 +77,9 @@ export default function SubscriptionPage() {
 
         <p className="text-[#64A67E] font-bold mb-4">Pick a plan</p>
 
-        {/* Plan cards exactly as in screenshot */}
         <div className="grid grid-cols-2 mb-6 items-center">
           <Card
-            className={`bg-white relative w-52 h-32 rounded-4xl shadow-sm cursor-pointer ${
+            className={`bg-white relative w-40 md:w-52 h-32 rounded-4xl shadow-sm cursor-pointer ${
               selectedPlan === "monthly" ? "bg-orange-500" : ""
             }`}
             onClick={() => setSelectedPlan("monthly")}
@@ -109,7 +97,7 @@ export default function SubscriptionPage() {
           </Card>
 
           <Card
-            className={`bg-white relative w-52 h-32 rounded-4xl shadow-sm cursor-pointer ${
+            className={`bg-white relative w-40 md:w-52 h-32 rounded-4xl shadow-sm cursor-pointer ${
               selectedPlan === "yearly" ? "bg-orange-500" : ""
             }`}
             onClick={() => setSelectedPlan("yearly")}

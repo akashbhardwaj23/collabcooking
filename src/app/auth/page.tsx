@@ -150,8 +150,6 @@ export default function AuthPage() {
         </div>
       </div>
       
-
-      {/* Right Side - Auth Form exactly as in screenshot */}
       <div className="absolute flex items-center justify-center font-roboto inset-8">
         <div className="w-full max-w-sm">
           <div className="bg-white rounded-4xl shadow-xl px-4 py-6 font-medium">

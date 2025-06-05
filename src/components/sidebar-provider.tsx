@@ -11,7 +11,7 @@ export default function SidebarProvider({
     const pathname = usePathname();
     
     // console.log("pathname ", pathname)
-    if(pathname.includes('/home') || pathname.includes("/generator") || pathname.includes('/favourites') || pathname.includes('/my-recipes') || pathname.includes('/profile')){
+    if(pathname.includes('/home') || pathname.includes("/generator") || pathname.includes('/favourites') || pathname.includes('/my-recipes')){
         return (
             <>
         <Sidebar pathname={pathname} />
