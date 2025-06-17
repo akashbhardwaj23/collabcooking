@@ -1,6 +1,6 @@
 "use client"
 import Navbar from "@/components/navbar"
-import { MyRecipeCard } from "../my-recipes/page"
+import { MyRecipeCard } from "@/components/reciepecard"
 
 const favoriteRecipes = [
   {
@@ -25,8 +25,8 @@ export default function FavouritesPage() {
       <div className="max-w-4xl mx-auto px-4">
           <Navbar />
         <div className="space-y-6 ml-12 md:ml-0">
-          {favoriteRecipes.slice(0,1).map((recipe) => (
-            <MyRecipeCard src={recipe.image} alt={recipe.title} likes={recipe.likes} title={recipe.title} cuisine={recipe.category} />
+          {favoriteRecipes.slice(0,1).map((recipe, index) => (
+            <MyRecipeCard key={index} src={recipe.image} alt={recipe.title} likes={recipe.likes} title={recipe.title} cuisine={recipe.category} />
           ))}
         </div>
       </div>

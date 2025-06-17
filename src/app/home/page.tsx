@@ -1,29 +1,17 @@
 "use client";
 
-import { useState } from "react";
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import {
-  Search,
-  Heart,
-  ChefHat,
-  Home,
-  Settings,
-  Download,
-  PanelRightOpen,
-  PanelRightClose,
-  Plus,
-} from "lucide-react";
 import Link from "next/link";
 import { useAuth } from "@/components/auth-provider";
-import { motion } from "motion/react";
+// import { motion } from "motion/react";
 import { redirect } from "next/navigation";
-import Image from "next/image";
+// import Image from "next/image";
 import Navbar from "@/components/navbar";
-import { MyRecipeCard } from "../my-recipes/page";
+import { MyRecipeCard } from "@/components/reciepecard";
 
 const cuisineTags = [
   { name: "Ramen", color: "bg-orange-500" },
@@ -68,13 +56,11 @@ export default function HomePage() {
     redirect("/auth");
   }
 
-  // Main dashboard matching the exact screenshot design
   return (
     <div className="min-h-screen bg-gradient-to-br from-orange-50 to-red-50"> 
       <div className="max-w-6xl mx-auto px-4 pb-8">
       <Navbar />
 
-        {/* Greeting exactly as in screenshot */}
         <div className="mb-6 font-roboto ml-16 md:ml-0">
           <h1 className="text-2xl font-semibold text-[#64A67E] mb-1">
             Hello <span className="text-orange-500">{user?.name}</span>,
@@ -83,8 +69,6 @@ export default function HomePage() {
             what do you want to cook today?
           </p>
         </div>
-
-        {/* Cuisine Tags exactly as in screenshot */}
         <div className="mb-8">
           <div className="flex flex-wrap gap-3">
             {cuisineTags.map((tag, index) => (
@@ -98,7 +82,6 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* Top Chefs exactly as in screenshot */}
         <div className="mb-8">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-xl font-semibold text-[#64A67E]">Top Chefs</h2>
@@ -136,14 +119,14 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* Trending Recipes exactly as in screenshot */}
+
         <div className="mb-8">
           <h2 className="text-xl font-semibold text-[#64A67E] mb-4">
             Trending Recipes
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {trendingRecipes.map((recipe) => (
-              <div>
+            {trendingRecipes.map((recipe, index) => (
+              <div key={index}>
                 {/* <Card
                   key={recipe.id}
                   className="h-[600px] relative flex items-center bg-transparent border-none shadow-none"
@@ -177,13 +160,12 @@ export default function HomePage() {
                     </CardContent>
                   </Link>
                 </Card> */}
-                <MyRecipeCard src={recipe.image} alt={recipe.title} title={recipe.title} likes={recipe.likes} cuisine={recipe.category} />
+                <MyRecipeCard key={index} src={recipe.image} alt={recipe.title} title={recipe.title} likes={recipe.likes} cuisine={recipe.category} />
               </div>
             ))}
           </div>
         </div>
 
-        {/* Featured Programs exactly as in screenshot */}
         <div className="space-y-4 relative md:block hidden">
           <Card className="bg-[url(/images/soup-bowl-1.png)] bg-no-repeat bg-red-700 bg-contain bg-center text-white rounded-4xl overflow-hidden">
             <CardContent className="p-6 flex items-center justify-between">

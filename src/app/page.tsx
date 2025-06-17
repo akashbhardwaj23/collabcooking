@@ -23,7 +23,6 @@ export default function SplashPage() {
   useEffect(() => {
     //check if the loading is happening
     // console.log("loading ", loading)
-    // Only redirect after animation completes and auth is checked
     if (animationComplete) {
       const redirectTimer = setTimeout(() => {
         if (user) {
@@ -31,15 +30,13 @@ export default function SplashPage() {
         } else {
           router.push("/auth")
         }
-      }, 500) // Small delay after animation
-
+      }, 500)
       return () => clearTimeout(redirectTimer)
     }
   }, [animationComplete, user, router])
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-orange-50 to-red-50 flex items-center justify-center relative overflow-hidden">
-      {/* Geometric background shapes */}
       <div className="absolute inset-0">
         <motion.div
           className="absolute top-20 left-20 w-32 h-32 bg-white/20 rounded-full"
@@ -67,7 +64,7 @@ export default function SplashPage() {
         />
       </div>
 
-      {/* Logo with animation */}
+
       <div className="text-center z-10">
         <motion.div
           initial={{ scale: 0 }}
@@ -81,7 +78,7 @@ export default function SplashPage() {
           className="mb-4"
         >
           <motion.div
-            className="w-20 h-20 bg-orange-500 rounded-full flex items-center justify-center mx-auto mb-2 shadow-lg"
+            className="w-40 h-40 bg-orange-500 rounded-full flex items-center justify-center mx-auto mb-2 shadow-lg"
             animate={{
               y: [0, -10, 0],
             }}
@@ -96,8 +93,8 @@ export default function SplashPage() {
         </motion.div>
 
         <motion.h1
-          className="text-3xl font-bold text-gray-900 mb-2"
-          initial={{ opacity: 0, x: -20 }}
+          className="text-4xl font-bold font-roboto text-gray-900 mb-2"
+          initial={{ opacity: 0, x: -40 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.8, duration: 0.8 }}
         >
@@ -105,7 +102,7 @@ export default function SplashPage() {
         </motion.h1>
 
         <motion.p
-          className="text-gray-600 text-sm"
+          className="text-neutral-600 font-roboto text-sm"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.2, duration: 0.8 }}
